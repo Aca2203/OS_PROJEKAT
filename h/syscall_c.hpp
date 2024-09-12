@@ -1,3 +1,6 @@
+#ifndef SYSCALL_C_H
+#define SYSCALL_C_H
+
 #include "../lib/hw.h"
 
 typedef _thread* thread_t;
@@ -8,8 +11,8 @@ typedef unsigned long time_t;
 const int EOF = -1;
 
 // Upravljanje memorijom
-void* mem_alloc(size_t size);
-int mem_free(void*);
+void* mem_alloc(size_t size); //Alociranje najmanje size bajtova memorije
+int mem_free(void*); //Dealociranje memorije sa date adrese
 
 // Upravljanje procesima
 // Niti
@@ -38,3 +41,5 @@ int time_sleep(time_t);
 
 char getc();
 void putc(char);
+
+#endif

@@ -1,10 +1,10 @@
-#ifndef _syscall_cpp
-#define _syscall_cpp
+#ifndef SYSCALL_CPP_H
+#define SYSCALL_CPP_H
 
 #include "syscall_c.hpp"
 
-void* ::operator new(size_t);
-void ::operator delete(void*);
+void* ::operator new(size_t); // Alokacija memorije
+void ::operator delete(void*); // Dealokacija memorije
 
 class Thread {
 public:
