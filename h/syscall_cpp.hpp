@@ -3,8 +3,8 @@
 
 #include "syscall_c.hpp"
 
-void* ::operator new(size_t); // Alokacija memorije
-void ::operator delete(void*); // Dealokacija memorije
+void* operator new (size_t); // Alokacija memorije
+void operator delete (void*); // Dealokacija memorije
 
 class Thread {
 public:

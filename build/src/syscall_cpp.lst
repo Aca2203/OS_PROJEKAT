@@ -1,0 +1,42 @@
+GAS LISTING /tmp/cc7Siac4.s 			page 1
+
+
+   1              		.file	"syscall_cpp.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.text
+   5              	.Ltext0:
+   6              	.Letext0:
+   7              		.file 1 "src/../h/../lib/hw.h"
+   8              		.file 2 "src/../h/syscall_c.hpp"
+GAS LISTING /tmp/cc7Siac4.s 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 syscall_cpp.cpp
+     /tmp/cc7Siac4.s:148    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/cc7Siac4.s:336    .debug_str:00000000000000df .LASF18
+     /tmp/cc7Siac4.s:318    .debug_str:0000000000000053 .LASF19
+     /tmp/cc7Siac4.s:340    .debug_str:00000000000001b2 .LASF20
+     /tmp/cc7Siac4.s:304    .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/cc7Siac4.s:306    .debug_str:0000000000000000 .LASF0
+     /tmp/cc7Siac4.s:334    .debug_str:00000000000000cc .LASF1
+     /tmp/cc7Siac4.s:324    .debug_str:000000000000007a .LASF2
+     /tmp/cc7Siac4.s:320    .debug_str:0000000000000067 .LASF4
+     /tmp/cc7Siac4.s:316    .debug_str:0000000000000041 .LASF3
+     /tmp/cc7Siac4.s:312    .debug_str:000000000000002a .LASF5
+     /tmp/cc7Siac4.s:344    .debug_str:00000000000001e5 .LASF6
+     /tmp/cc7Siac4.s:332    .debug_str:00000000000000b9 .LASF7
+     /tmp/cc7Siac4.s:342    .debug_str:00000000000001d5 .LASF8
+     /tmp/cc7Siac4.s:308    .debug_str:000000000000000d .LASF9
+     /tmp/cc7Siac4.s:310    .debug_str:000000000000001b .LASF10
+     /tmp/cc7Siac4.s:338    .debug_str:00000000000001a3 .LASF11
+     /tmp/cc7Siac4.s:314    .debug_str:0000000000000031 .LASF12
+     /tmp/cc7Siac4.s:346    .debug_str:00000000000001f8 .LASF13
+     /tmp/cc7Siac4.s:322    .debug_str:000000000000006e .LASF14
+     /tmp/cc7Siac4.s:330    .debug_str:00000000000000a3 .LASF15
+     /tmp/cc7Siac4.s:328    .debug_str:000000000000008d .LASF16
+     /tmp/cc7Siac4.s:326    .debug_str:0000000000000088 .LASF17
+     /tmp/cc7Siac4.s:10     .debug_info:0000000000000000 .Ldebug_info0
+
+NO UNDEFINED SYMBOLS

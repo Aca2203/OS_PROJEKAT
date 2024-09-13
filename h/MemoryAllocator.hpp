@@ -5,8 +5,8 @@
 
 // Struktura u kojoj se cuvaju podaci o slobodnom ili zauzetom segmentu
 struct Segment{
-    Segment* next; // Pokazivac na sledeci segment (sortirano od nizih ka visim adresama)
-    size_t size; // Velicina segmenta u jedinicama MEM_BLOCK_SIZE
+    Segment* next; // Pokazivac na sledeci slobodan ili zauzet segment (segmenti su sortirani od nizih ka visim adresama)
+    size_t size; // Velicina segmenta u bajtovima
 };
 
 class MemoryAllocator {
@@ -16,9 +16,9 @@ public:
 
 protected:
   MemoryAllocator() {};
-  static void tryToJoin(Segment* segment); // Spajanje dva slobodna segmenta
-  static void insert_free_segment(Segment* segment, Segment* prev);
-  static void remove_free_segment(Segment* segment, Segment* prev);
+  static void tryToJoin(Segment* segment); // Pokusaj spajanja datog segmenta sa sledecim
+  static void insert_segment(Segment* segment, Segment* prev, int code); // code == 0 -> rad sa listom slobodnih segmenata
+  static void remove_segment(Segment* segment, Segment* prev, int code); // code == 1 -> rad sa listom zauzetih segmenata
 
 private:
   static Segment* head_free_segment; // Pokazivac na prvi slobodan segment

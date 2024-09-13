@@ -3,7 +3,10 @@
 
 #include "../lib/hw.h"
 
+class _thread;
 typedef _thread* thread_t;
+
+class _sem;
 typedef _sem* sem_t;
 
 typedef unsigned long time_t;

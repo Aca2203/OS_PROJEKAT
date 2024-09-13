@@ -1,10 +1,10 @@
 #include "../h/syscall_c.hpp"
 
-typedef struct thread{
+class _thread{
   int id;
   struct _thread *next;
-} _thread;
+};
 
-typedef struct sem{
+class _sem{
   int id;
-} _sem;
+};
