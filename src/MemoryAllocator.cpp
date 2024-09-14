@@ -1,8 +1,8 @@
 #include "../lib/hw.h"
 #include "../h/MemoryAllocator.hpp"
 
-// Segment* MemoryAllocator::head_free_segment = (Segment*) HEAP_START_ADDR;
-// Segment* MemoryAllocator::head_data_segment = nullptr;
+Segment* MemoryAllocator::head_free_segment = (Segment*) HEAP_START_ADDR;
+Segment* MemoryAllocator::head_data_segment = nullptr;
 
 void* MemoryAllocator::mem_alloc(size_t size) {
     if(size == 0) return nullptr; // Greska
@@ -13,7 +13,7 @@ void* MemoryAllocator::mem_alloc(size_t size) {
             remove_segment(segment, prev, 0); // Izbacivanje slobodnog segmenta iz liste slobodnih segmenata
 
             size_t data_size;
-            if(segment->size - new_size > sizeof(Segment)) {
+            if(segment->size - new_size >= sizeof(Segment)) {
                 Segment* new_segment = (Segment*) ((char*) segment + sizeof(Segment) + new_size);
                 new_segment->size = segment->size - new_size - sizeof(Segment);
                 insert_segment(new_segment, prev, 0); // Ubacivanje slobodnog segmenta koji je ostao nakon alokacije
@@ -33,12 +33,11 @@ void* MemoryAllocator::mem_alloc(size_t size) {
         }
     }
 
-    return nullptr;
+    return nullptr; // Nije pronadjen slobodan segment dovoljne velicine
 }
 
 int MemoryAllocator::mem_free(void* ptr) {
-    if(head_data_segment == nullptr) return -1; // Cela memorija je slobodna
-    if(ptr == nullptr || ptr < HEAP_START_ADDR || ptr >= HEAP_END_ADDR) return -2; // Adresa se nalazi van opsega
+    if(ptr == nullptr || ptr < HEAP_START_ADDR || ptr >= HEAP_END_ADDR) return -1; // Adresa se nalazi van opsega
 
     for(Segment* segment = head_data_segment, *prev = nullptr; segment; prev = segment, segment = segment->next) {
         if((char*) segment + sizeof(Segment) == (char*) ptr) {
@@ -53,7 +52,7 @@ int MemoryAllocator::mem_free(void* ptr) {
         if((char*) segment + sizeof(Segment) > (char*) ptr) break;
     }
 
-    return -3; // Data adresa nije dobijena sa mem_alloc
+    return -2; // Data adresa nije dobijena sa mem_alloc
 }
 
 void MemoryAllocator::tryToJoin(Segment *segment) {
@@ -61,7 +60,6 @@ void MemoryAllocator::tryToJoin(Segment *segment) {
     if((char*) segment + sizeof(Segment) + segment->size == (char*) segment->next) {
         segment->size += sizeof(Segment) + segment->next->size;
         segment->next = segment->next->next;
-        segment->next->next = nullptr;
     }
 }
 
