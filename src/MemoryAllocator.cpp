@@ -43,6 +43,7 @@ int MemoryAllocator::mem_free(void* ptr) {
         if((char*) segment + sizeof(Segment) == (char*) ptr) {
             remove_segment(segment, prev, 1); // Izbacivanje segmenta iz liste zauzetih segmenata
             for(prev = head_free_segment; prev && prev->next && prev->next < segment; prev = prev->next){}
+            if(prev > segment) prev = nullptr;
             insert_segment(segment, prev, 0); // Ubacivanje segmenta u listu slobodnih segmenata
             tryToJoin(segment);
             tryToJoin(prev);
@@ -66,7 +67,13 @@ void MemoryAllocator::tryToJoin(Segment *segment) {
 void MemoryAllocator::insert_segment(Segment* segment, Segment* prev, int code) {
     if(!segment || code < 0 || code > 1) return;
     if(!prev) {
-        code==0 ? segment->next = head_free_segment, head_free_segment = segment : segment->next = head_data_segment, head_data_segment = segment;
+        if(code == 0) {
+            segment->next = head_free_segment;
+            head_free_segment = segment;
+        } else {
+            segment->next = head_data_segment;
+            head_data_segment = segment;
+        }
     }
     else {
         segment->next = prev->next;
@@ -76,7 +83,10 @@ void MemoryAllocator::insert_segment(Segment* segment, Segment* prev, int code) 
 
 void MemoryAllocator::remove_segment(Segment* segment, Segment* prev, int code) {
     if(!segment || code < 0 || code > 1) return;
-    if(!prev) code==0 ? head_free_segment = segment->next : head_data_segment = segment->next;
+    if(!prev) {
+        if(code == 0) head_free_segment = segment->next;
+        else head_data_segment = segment->next;
+    }
     else prev->next = segment->next;
     segment->next = nullptr;
 }
