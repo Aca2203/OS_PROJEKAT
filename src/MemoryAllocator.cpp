@@ -1,8 +1,8 @@
 #include "../lib/hw.h"
 #include "../h/MemoryAllocator.hpp"
 
-Segment* MemoryAllocator::head_free_segment = nullptr;
-Segment* MemoryAllocator::head_data_segment = nullptr;
+Segment* MemoryAllocator::head_free_segment;
+Segment* MemoryAllocator::head_data_segment;
 
 void* MemoryAllocator::mem_alloc(size_t size) {
     if(size == 0) return nullptr; // Greska
@@ -79,4 +79,12 @@ void MemoryAllocator::remove_segment(Segment* segment, Segment* prev, int code) 
     if(!prev) code==0 ? head_free_segment = segment->next : head_data_segment = segment->next;
     else prev->next = segment->next;
     segment->next = nullptr;
+}
+
+void MemoryAllocator::initFreeSegment() {
+    head_free_segment = (Segment*) HEAP_START_ADDR;
+    head_data_segment = nullptr;
+
+    head_free_segment->next = nullptr;
+    head_free_segment->size = (char*)HEAP_END_ADDR - (char*)HEAP_START_ADDR - sizeof(Segment);
 }

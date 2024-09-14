@@ -13,6 +13,7 @@ class MemoryAllocator {
 public:
   static void* mem_alloc(size_t size);
   static int mem_free(void*);
+  static void initFreeSegment();
 
 protected:
   MemoryAllocator() {};
