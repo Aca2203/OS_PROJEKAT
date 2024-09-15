@@ -5,6 +5,10 @@
 
 class Riscv {
 public:
+    // Stavljanje/skidanje registara x3,...,x31 na stek/sa steka
+    static void pushRegisters();
+    static void popRegisters();
+
     // Uzimanje vrednosti sstatus.spp i sstatus.spie bita (nije inline funkcija)
     static void popSppSpie();
 
