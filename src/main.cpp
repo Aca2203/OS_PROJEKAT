@@ -1,32 +1,26 @@
 #include "../lib/hw.h"
 #include "../lib/console.h"
-#include "../h/MemoryAllocator.hpp"
+#include "../h/tcb.hpp"
+#include "../h/workers.hpp"
+#include "../h/printing.hpp"
 
 int main() {
-    MemoryAllocator::initFreeSegment();
+    TCB* threads[3];
 
-    int velicinaZaglavlja = sizeof(Segment); // meni je ovoliko
+    threads[0] = TCB::createThread(nullptr);
+    TCB::running = threads[0];
 
-    const size_t maxMemorija = (((size_t)HEAP_END_ADDR - (size_t)HEAP_START_ADDR - velicinaZaglavlja)/MEM_BLOCK_SIZE - 1)*MEM_BLOCK_SIZE ;
-    char* niz = (char*)MemoryAllocator::mem_alloc(maxMemorija); // celokupan prostor
-    if(niz == nullptr) {
-        __putc('?');
-    }
+    threads[1] = TCB::createThread(workerBodyA);
+    printString("Coroutine A created\n");
+    threads[2] = TCB::createThread(workerBodyB);
+    printString("Coroutine B created\n");
 
-    int n = 200;
-    char* niz2 = (char*)MemoryAllocator::mem_alloc(n*sizeof(char));
-    if(niz2 == nullptr) {
-        __putc('k');
-    }
+    while(!(threads[1]->isFinished() && threads[2]->isFinished())) TCB::yield();
 
-    int status = MemoryAllocator::mem_free(niz);
-    if(status) {
-        __putc('?');
+    for(auto &thread : threads) {
+        delete thread;
     }
-    niz2 = (char*)MemoryAllocator::mem_alloc(n*sizeof(char));
-    if(niz2 == nullptr) {
-        __putc('?');
-    }
+    printString("Finished\n");
 
     return 0;
 }

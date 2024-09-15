@@ -5,6 +5,10 @@
 
 class Riscv {
 public:
+    // Stavljanje/skidanje registara x3,...,x31 na stek/sa steka
+    static void pushRegisters();
+    static void popRegisters();
+
     // Uzimanje vrednosti sstatus.spp i sstatus.spie bita (nije inline funkcija)
     static void popSppSpie();
 
@@ -170,7 +174,7 @@ inline uint64 Riscv::r_a0() {
 }
 
 inline void Riscv::w_a0(uint64 value) {
-    __asm__ volatile("mv a0, %0" : : "=r"(value));
+    __asm__ volatile("mv a0, %0" : : "r"(value));
 }
 
 #endif

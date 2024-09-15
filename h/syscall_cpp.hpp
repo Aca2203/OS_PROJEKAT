@@ -4,7 +4,9 @@
 #include "syscall_c.hpp"
 
 void* operator new (size_t); // Alokacija memorije
-void operator delete (void*); // Dealokacija memorije
+void operator delete (void*) noexcept; // Dealokacija memorije
+void* operator new[] (size_t); // Alokacija memorije (niz)
+void operator delete[] (void*) noexcept; // Dealokacija memorije (niz)
 
 class Thread {
 public:

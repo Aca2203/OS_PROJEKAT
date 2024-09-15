@@ -2,9 +2,10 @@
 #define SYSCALL_C_H
 
 #include "../lib/hw.h"
+#include "tcb.hpp"
 
-class _thread;
-typedef _thread* thread_t;
+class TCB;
+typedef TCB* thread_t;
 
 class _sem;
 typedef _sem* sem_t;
