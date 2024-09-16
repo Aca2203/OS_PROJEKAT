@@ -22,6 +22,9 @@ int main() {
     for(auto &thread : threads) {
         delete thread;
     }
+
+    Scheduler::deleteThreadQueue();
+
     printString("Finished\n");
 
     return 0;
