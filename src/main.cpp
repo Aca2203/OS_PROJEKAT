@@ -5,6 +5,8 @@
 #include "../h/printing.hpp"
 
 int main() {
+    MemoryAllocator::initFreeSegment();
+
     TCB* threads[3];
 
     threads[0] = TCB::createThread(nullptr);

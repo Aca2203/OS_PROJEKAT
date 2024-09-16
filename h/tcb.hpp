@@ -41,6 +41,8 @@ private:
     Context context;
     bool finished;
 
+    friend class Riscv;
+
     static void contextSwitch(Context* oldContext, Context* newContext);
 
     static void dispatch();
