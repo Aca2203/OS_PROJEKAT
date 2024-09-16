@@ -23,10 +23,10 @@ public:
 private:
     TCB(Body body) :
         body(body),
-        stack(body != nullptr ? new uint64[STACK_SIZE] : nullptr),
+        stack(body != nullptr ? new uint64[DEFAULT_STACK_SIZE] : nullptr),
         context({
             body != nullptr ? (uint64) body : 0,
-            stack != nullptr ? (uint64)&stack[STACK_SIZE] : 0
+            stack != nullptr ? (uint64)&stack[DEFAULT_STACK_SIZE] : 0
         }),
         finished(false) {
         if(body != nullptr) Scheduler::put(this);
@@ -46,8 +46,6 @@ private:
     static void contextSwitch(Context* oldContext, Context* newContext);
 
     static void dispatch();
-
-    static uint64 constexpr STACK_SIZE = 1024;
 };
 
 #endif
