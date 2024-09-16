@@ -3,6 +3,7 @@
 #include "../h/scheduler.hpp"
 
 TCB* TCB::running = nullptr;
+uint64 TCB::timeSliceCounter = 0;
 
 TCB* TCB::createThread(Body body) {
     return new TCB(body);
@@ -22,4 +23,10 @@ void TCB::dispatch() {
     running = Scheduler::get();
 
     TCB::contextSwitch(&old->context, &running->context);
+}
+
+void TCB::threadWrapper() {
+
+    running->body();
+    running->setFinished(true);
 }
