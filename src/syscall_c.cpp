@@ -51,3 +51,17 @@ void thread_dispatch() {
     Riscv::w_a0(0x13);
     __asm__ volatile("ecall");
 }
+
+char getc() {
+    Riscv::w_a0(0x41);
+    __asm__ volatile("ecall");
+
+    char ret = (char) Riscv::r_a0();
+    return ret;
+}
+
+void putc(char ch) {
+    __asm__ volatile("mv a1, %0" : : "r"(ch));
+    Riscv::w_a0(0x42);
+    __asm__ volatile("ecall");
+}

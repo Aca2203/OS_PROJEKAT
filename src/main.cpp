@@ -3,6 +3,7 @@
 #include "../h/workers.hpp"
 #include "../h/printing.hpp"
 #include "../h/riscv.hpp"
+#include "../lib/console.h"
 
 extern void userMain();
 
@@ -12,7 +13,7 @@ int main() {
     thread_t threads[2];
 
     Riscv::w_stvec((uint64) &Riscv::supervisorTrap);
-    Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
+    Riscv::mc_sstatus(Riscv::SSTATUS_SIE);
 
     thread_create(&threads[0], nullptr, nullptr);
     thread_create(&threads[1], reinterpret_cast<void (*) (void *)>(userMain), nullptr);

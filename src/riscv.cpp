@@ -16,13 +16,14 @@ void Riscv::handleSupervisorTrap() {
     uint64 scause = r_scause();
     if(scause == 0x0000000000000008UL || scause == 0x0000000000000009UL) {
         // Nije se dogodio prekid, sistemski poziv iz korisnickog ili sistemskog rezima rezima
-        uint64 sepc = r_sepc() + 4;
-        uint64 sstatus = r_sstatus();
+        uint64 volatile sepc = r_sepc() + 4;
+        uint64 volatile sstatus = r_sstatus();
         TCB::timeSliceCounter = 0;
 
         uint64 code = r_a0();
         void* ptr;
         int ret;
+        char chr;
 
         // Semaphore
         switch (code) {
@@ -78,6 +79,18 @@ void Riscv::handleSupervisorTrap() {
 
                 break;
 
+            case 0x41:
+                chr = __getc();
+                __asm__ volatile("mv a0, %0" : : "r" (chr));
+                __asm__ volatile("sw a0, 80(x8)");
+
+            break;
+
+            case 0x42:
+                __asm__ volatile("mv %0, a1" : "=r" (chr));
+                __putc(chr);
+                break;
+
             default:
                 break;
         }
@@ -87,19 +100,19 @@ void Riscv::handleSupervisorTrap() {
         w_sepc(sepc);
     } else if(scause == 0x8000000000000001UL) {
         // Dogodio se prekid, razlog: prekid od supervizora (tajmer)
-        if(++TCB::timeSliceCounter >= TCB::running->getTimeSlice()) {
-            uint64 sepc = r_sepc();
-            uint64 sstatus = r_sstatus();
-            TCB::timeSliceCounter = 0;
-            TCB::dispatch();
-            w_sstatus(sstatus);
-            w_sepc(sepc);
-        }
         mc_sip(SIP_SSIP);
+        // if(++TCB::timeSliceCounter >= TCB::running->getTimeSlice()) {
+        //     uint64 volatile sepc = r_sepc();
+        //     uint64 volatile sstatus = r_sstatus();
+        //     TCB::timeSliceCounter = 0;
+        //     TCB::dispatch();
+        //     w_sstatus(sstatus);
+        //     w_sepc(sepc);
+        // }
     } else if (scause == 0x8000000000000009UL) {
         // Dogodio se prekid, razlog: spoljasni prekid (konzola)
         console_handler();
-        mc_sip(SIP_SEIP);
+        //mc_sip(SIP_SEIP);
     } else {
         // Neocekivani razlog prekida
         uint64 sepc = r_sepc();
