@@ -10,6 +10,8 @@ void Riscv::popSppSpie() {
     __asm__ volatile("sret");
 }
 
+using Body = void (*)(void *);
+
 void Riscv::handleSupervisorTrap() {
     uint64 scause = r_scause();
     if(scause == 0x0000000000000008UL || scause == 0x0000000000000009UL) {
@@ -44,6 +46,34 @@ void Riscv::handleSupervisorTrap() {
                 ret = MemoryAllocator::mem_free(ptr);
 
                 __asm__ volatile("mv a0, %0" : : "r" (ret));
+                __asm__ volatile("sw a0, 80(x8)");
+
+                break;
+
+            case 0x11:
+                thread_t* handle;
+                Body body;
+                void* arg;
+
+                __asm__ volatile("mv %0, a1" : "=r" (handle));
+                __asm__ volatile("mv %0, a2" : "=r" (body));
+                __asm__ volatile("mv %0, a7" : "=r" (arg));
+
+                *handle = TCB::createThread(body, arg);
+
+                if(*handle != nullptr) {
+                    __asm__ volatile("li a0, 0");
+                    __asm__ volatile("sw a0, 80(x8)");
+                } else {
+                    __asm__ volatile("li a0, -1");
+                    __asm__ volatile("sw a0, 80(x8)");
+                }
+
+                break;
+
+            case 0x12:
+                TCB::running->setFinished(true);
+                __asm__ volatile("li a0, 0");
                 __asm__ volatile("sw a0, 80(x8)");
 
                 break;

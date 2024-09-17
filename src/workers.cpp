@@ -13,6 +13,7 @@ void workerBodyA(void* arg)
         printString("A: i=");
         printInt(i);
         printString("\n");
+        thread_exit();
         for (uint64 j = 0; j < 10000; j++)
         {
             for (uint64 k = 0; k < 30000; k++)

@@ -34,6 +34,7 @@ private:
         time_slice(DEFAULT_TIME_SLICE),
         finished(false) {
         if(body != nullptr) Scheduler::put(this);
+        else TCB::running = this;
     }
 
     struct Context {
