@@ -75,9 +75,6 @@ public:
     // Supervizorska prekidna rutina
     static void supervisorTrap();
 
-    // stvec tabela prekidnih rutina
-    static void stvecVectorTable();
-
     // Citanje registra a0
     static uint64 r_a0();
 
@@ -87,8 +84,6 @@ public:
 private:
     // Rukovalac prekidnom rutinom
     static void handleSupervisorTrap();
-    static void handleTimerInterrupt();
-    static void handleConsoleInterrupt();
 };
 
 inline uint64 Riscv::r_scause() {

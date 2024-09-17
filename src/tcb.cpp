@@ -10,11 +10,7 @@ TCB* TCB::createThread(Body body) {
 }
 
 void TCB::yield() {
-    Riscv::pushRegisters();
-
-    TCB::dispatch();
-
-    Riscv::popRegisters();
+    __asm__ volatile("ecall");
 }
 
 void TCB::dispatch() {
@@ -26,7 +22,8 @@ void TCB::dispatch() {
 }
 
 void TCB::threadWrapper() {
-
+    Riscv::popSppSpie();
     running->body();
     running->setFinished(true);
+    TCB::yield();
 }
