@@ -14,17 +14,18 @@ public:
 
     uint64 getTimeSlice() const { return time_slice; }
 
-    using Body = void (*)();
+    using Body = void (*)(void *);
 
-    static TCB* createThread(Body body);
+    static TCB* createThread(Body body, void* arg);
 
     static void yield();
 
     static TCB* running;
 
 private:
-    explicit TCB(Body body) :
+    explicit TCB(Body body, void* arg) :
         body(body),
+        arg(arg),
         stack(body != nullptr ? new uint64[DEFAULT_STACK_SIZE] : nullptr),
         context({
             (uint64) &threadWrapper,
@@ -40,6 +41,7 @@ private:
         uint64 sp;
     };
     Body body;
+    void* arg;
     uint64* stack; // Mozda mora da bude char*
     Context context;
     uint64 time_slice;
