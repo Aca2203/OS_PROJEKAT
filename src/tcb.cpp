@@ -10,6 +10,7 @@ TCB* TCB::createThread(Body body) {
 }
 
 void TCB::yield() {
+    Riscv::w_a0(0);
     __asm__ volatile("ecall");
 }
 
