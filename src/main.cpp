@@ -4,28 +4,20 @@
 #include "../h/printing.hpp"
 #include "../h/riscv.hpp"
 
+extern void userMain();
+
 int main() {
     MemoryAllocator::initFreeSegment();
 
-    thread_t threads[5];
+    thread_t threads[2];
 
     Riscv::w_stvec((uint64) &Riscv::supervisorTrap);
     Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
 
     thread_create(&threads[0], nullptr, nullptr);
+    thread_create(&threads[1], reinterpret_cast<void (*) (void *)>(userMain), nullptr);
 
-    thread_dispatch();
-
-    thread_create(&threads[1], workerBodyA, nullptr);
-    printString("Thread A created\n");
-    thread_create(&threads[2], workerBodyB, nullptr);
-    printString("Thread B created\n");
-    thread_create(&threads[3], workerBodyC, nullptr);
-    printString("Thread C created\n");
-    thread_create(&threads[4], workerBodyD, nullptr);
-    printString("Thread D created\n");
-
-    while(!(threads[1]->isFinished() && threads[2]->isFinished() && threads[3]->isFinished() && threads[4]->isFinished())) TCB::yield();
+    while(!(threads[1]->isFinished())) thread_dispatch();
 
     for(auto &thread : threads) {
         delete thread;
@@ -33,7 +25,7 @@ int main() {
 
     Scheduler::deleteThreadQueue();
 
-    printString("Finished\n");
+    printString("Proces zavrsen\n");
 
     return 0;
 }
