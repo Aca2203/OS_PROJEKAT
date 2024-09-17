@@ -18,6 +18,10 @@ public:
 
     static TCB* createThread(Body body, void* arg);
 
+    static TCB* createThreadWithoutStarting(Body body, void* arg);
+
+    static void startThread(TCB* tcb);
+
     static void yield();
 
     static TCB* running;
@@ -32,10 +36,7 @@ private:
             stack != nullptr ? (uint64)&stack[DEFAULT_STACK_SIZE] : 0
         }),
         time_slice(DEFAULT_TIME_SLICE),
-        finished(false) {
-        if(body != nullptr) Scheduler::put(this);
-        else TCB::running = this;
-    }
+        finished(false) {}
 
     struct Context {
         uint64 pc;

@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccdq2ap2.s 			page 1
+GAS LISTING /tmp/ccSI24J1.s 			page 1
 
 
    1              		.file	"userMain.cpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccdq2ap2.s 			page 1
   27      74616B20 
   27      322E2C20 
   28 0177 00       		.align	3
-GAS LISTING /tmp/ccdq2ap2.s 			page 2
+GAS LISTING /tmp/ccSI24J1.s 			page 2
 
 
   29              	.LC7:
@@ -118,7 +118,7 @@ GAS LISTING /tmp/ccdq2ap2.s 			page 1
   46              		.cfi_offset 1, -8
   47              		.cfi_offset 8, -16
   48              		.cfi_offset 9, -24
-GAS LISTING /tmp/ccdq2ap2.s 			page 3
+GAS LISTING /tmp/ccSI24J1.s 			page 3
 
 
   49              		.cfi_offset 18, -32
@@ -178,7 +178,7 @@ GAS LISTING /tmp/ccdq2ap2.s 			page 1
   80              		.loc 1 53 5
   81 0050 93071000 		li	a5,1
   82 0054 63F02707 		bleu	s2,a5,.L12
-GAS LISTING /tmp/ccdq2ap2.s 			page 4
+GAS LISTING /tmp/ccSI24J1.s 			page 4
 
 
   54:src/userMain.cpp ****         if (LEVEL_4_IMPLEMENTED == 0) {
@@ -238,7 +238,7 @@ GAS LISTING /tmp/ccdq2ap2.s 			page 1
   73:src/userMain.cpp ****         case 3:
   74:src/userMain.cpp **** #if LEVEL_3_IMPLEMENTED == 1
   75:src/userMain.cpp ****             producerConsumer_C_API();
-GAS LISTING /tmp/ccdq2ap2.s 			page 5
+GAS LISTING /tmp/ccSI24J1.s 			page 5
 
 
   76:src/userMain.cpp ****             printString("TEST 3 (zadatak 3., kompletan C API sa semaforima, sinhrona promena kontek
@@ -298,7 +298,7 @@ GAS LISTING /tmp/ccdq2ap2.s 			page 1
  129 00b4 17050000 		lla	a0,.LC2
  129      13050500 
  130 00bc 97000000 		call	_Z11printStringPKc@plt
-GAS LISTING /tmp/ccdq2ap2.s 			page 6
+GAS LISTING /tmp/ccSI24J1.s 			page 6
 
 
  130      E7800000 
@@ -358,7 +358,7 @@ GAS LISTING /tmp/ccdq2ap2.s 			page 1
  163 0104 17050000 		lla	a0,.LC3
  163      13050500 
  164 010c 97000000 		call	_Z11printStringPKc@plt
-GAS LISTING /tmp/ccdq2ap2.s 			page 7
+GAS LISTING /tmp/ccSI24J1.s 			page 7
 
 
  164      E7800000 
@@ -387,159 +387,159 @@ GAS LISTING /tmp/ccdq2ap2.s 			page 1
  182              		.file 4 "src/../h/syscall_c.hpp"
  183              		.file 5 "src/../test/System_Mode_test.hpp"
  184              		.file 6 "src/../test/Threads_C_API_test.hpp"
-GAS LISTING /tmp/ccdq2ap2.s 			page 8
+GAS LISTING /tmp/ccSI24J1.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 userMain.cpp
-     /tmp/ccdq2ap2.s:35     .text:0000000000000000 _Z8userMainv
-     /tmp/ccdq2ap2.s:39     .text:0000000000000000 .L0 
-     /tmp/ccdq2ap2.s:40     .text:0000000000000000 .L0 
-     /tmp/ccdq2ap2.s:41     .text:0000000000000004 .L0 
-     /tmp/ccdq2ap2.s:46     .text:0000000000000014 .L0 
-     /tmp/ccdq2ap2.s:47     .text:0000000000000014 .L0 
-     /tmp/ccdq2ap2.s:48     .text:0000000000000014 .L0 
-     /tmp/ccdq2ap2.s:49     .text:0000000000000014 .L0 
-     /tmp/ccdq2ap2.s:51     .text:0000000000000018 .L0 
-     /tmp/ccdq2ap2.s:53     .text:0000000000000018 .L0 
-     /tmp/ccdq2ap2.s:54     .text:0000000000000018 .L0 
-     /tmp/ccdq2ap2.s:58     .text:0000000000000028 .L0 
-     /tmp/ccdq2ap2.s:59     .text:0000000000000028 .L0 
-     /tmp/ccdq2ap2.s:63     .text:0000000000000034 .L0 
-     /tmp/ccdq2ap2.s:66     .text:0000000000000038 .L0 
-     /tmp/ccdq2ap2.s:67     .text:0000000000000038 .L0 
-     /tmp/ccdq2ap2.s:70     .text:0000000000000040 .L0 
-     /tmp/ccdq2ap2.s:71     .text:0000000000000040 .L0 
-     /tmp/ccdq2ap2.s:72     .text:0000000000000040 .L0 
-     /tmp/ccdq2ap2.s:74     .text:0000000000000044 .L0 
-     /tmp/ccdq2ap2.s:77     .text:000000000000004c .L0 
-     /tmp/ccdq2ap2.s:78     .text:000000000000004c .L0 
-     /tmp/ccdq2ap2.s:81     .text:0000000000000050 .L0 
-     /tmp/ccdq2ap2.s:84     .text:0000000000000058 .L0 
-     /tmp/ccdq2ap2.s:93     .text:0000000000000078 .L0 
-     /tmp/ccdq2ap2.s:94     .text:0000000000000078 .L0 
-     /tmp/ccdq2ap2.s:95     .text:0000000000000078 .L0 
-     /tmp/ccdq2ap2.s:99     .text:0000000000000088 .L0 
-     /tmp/ccdq2ap2.s:103    .text:000000000000008c .L0 
-     /tmp/ccdq2ap2.s:104    .text:000000000000008c .L0 
-     /tmp/ccdq2ap2.s:105    .text:000000000000008c .L0 
-     /tmp/ccdq2ap2.s:110    .text:000000000000009c .L0 
-     /tmp/ccdq2ap2.s:111    .text:000000000000009c .L0 
-     /tmp/ccdq2ap2.s:112    .text:00000000000000a0 .L0 
-     /tmp/ccdq2ap2.s:113    .text:00000000000000a0 .L0 
-     /tmp/ccdq2ap2.s:115    .text:00000000000000a4 .L0 
-     /tmp/ccdq2ap2.s:116    .text:00000000000000a4 .L0 
-     /tmp/ccdq2ap2.s:118    .text:00000000000000a8 .L0 
-     /tmp/ccdq2ap2.s:120    .text:00000000000000ac .L0 
-     /tmp/ccdq2ap2.s:122    .text:00000000000000b0 .L0 
-     /tmp/ccdq2ap2.s:125    .text:00000000000000b4 .L0 
-     /tmp/ccdq2ap2.s:127    .text:00000000000000b4 .L0 
-     /tmp/ccdq2ap2.s:128    .text:00000000000000b4 .L0 
-     /tmp/ccdq2ap2.s:129    .text:00000000000000b4 .L0 
-     /tmp/ccdq2ap2.s:133    .text:00000000000000c4 .L0 
-     /tmp/ccdq2ap2.s:136    .text:00000000000000c8 .L0 
-     /tmp/ccdq2ap2.s:139    .text:00000000000000d0 .L0 
-     /tmp/ccdq2ap2.s:140    .text:00000000000000d0 .L0 
-     /tmp/ccdq2ap2.s:141    .text:00000000000000d0 .L0 
-     /tmp/ccdq2ap2.s:144    .text:00000000000000d8 .L0 
-     /tmp/ccdq2ap2.s:145    .text:00000000000000d8 .L0 
-     /tmp/ccdq2ap2.s:149    .text:00000000000000e8 .L0 
-     /tmp/ccdq2ap2.s:150    .text:00000000000000e8 .L0 
-     /tmp/ccdq2ap2.s:154    .text:00000000000000f8 .L0 
-     /tmp/ccdq2ap2.s:157    .text:00000000000000fc .L0 
-GAS LISTING /tmp/ccdq2ap2.s 			page 9
+     /tmp/ccSI24J1.s:35     .text:0000000000000000 _Z8userMainv
+     /tmp/ccSI24J1.s:39     .text:0000000000000000 .L0 
+     /tmp/ccSI24J1.s:40     .text:0000000000000000 .L0 
+     /tmp/ccSI24J1.s:41     .text:0000000000000004 .L0 
+     /tmp/ccSI24J1.s:46     .text:0000000000000014 .L0 
+     /tmp/ccSI24J1.s:47     .text:0000000000000014 .L0 
+     /tmp/ccSI24J1.s:48     .text:0000000000000014 .L0 
+     /tmp/ccSI24J1.s:49     .text:0000000000000014 .L0 
+     /tmp/ccSI24J1.s:51     .text:0000000000000018 .L0 
+     /tmp/ccSI24J1.s:53     .text:0000000000000018 .L0 
+     /tmp/ccSI24J1.s:54     .text:0000000000000018 .L0 
+     /tmp/ccSI24J1.s:58     .text:0000000000000028 .L0 
+     /tmp/ccSI24J1.s:59     .text:0000000000000028 .L0 
+     /tmp/ccSI24J1.s:63     .text:0000000000000034 .L0 
+     /tmp/ccSI24J1.s:66     .text:0000000000000038 .L0 
+     /tmp/ccSI24J1.s:67     .text:0000000000000038 .L0 
+     /tmp/ccSI24J1.s:70     .text:0000000000000040 .L0 
+     /tmp/ccSI24J1.s:71     .text:0000000000000040 .L0 
+     /tmp/ccSI24J1.s:72     .text:0000000000000040 .L0 
+     /tmp/ccSI24J1.s:74     .text:0000000000000044 .L0 
+     /tmp/ccSI24J1.s:77     .text:000000000000004c .L0 
+     /tmp/ccSI24J1.s:78     .text:000000000000004c .L0 
+     /tmp/ccSI24J1.s:81     .text:0000000000000050 .L0 
+     /tmp/ccSI24J1.s:84     .text:0000000000000058 .L0 
+     /tmp/ccSI24J1.s:93     .text:0000000000000078 .L0 
+     /tmp/ccSI24J1.s:94     .text:0000000000000078 .L0 
+     /tmp/ccSI24J1.s:95     .text:0000000000000078 .L0 
+     /tmp/ccSI24J1.s:99     .text:0000000000000088 .L0 
+     /tmp/ccSI24J1.s:103    .text:000000000000008c .L0 
+     /tmp/ccSI24J1.s:104    .text:000000000000008c .L0 
+     /tmp/ccSI24J1.s:105    .text:000000000000008c .L0 
+     /tmp/ccSI24J1.s:110    .text:000000000000009c .L0 
+     /tmp/ccSI24J1.s:111    .text:000000000000009c .L0 
+     /tmp/ccSI24J1.s:112    .text:00000000000000a0 .L0 
+     /tmp/ccSI24J1.s:113    .text:00000000000000a0 .L0 
+     /tmp/ccSI24J1.s:115    .text:00000000000000a4 .L0 
+     /tmp/ccSI24J1.s:116    .text:00000000000000a4 .L0 
+     /tmp/ccSI24J1.s:118    .text:00000000000000a8 .L0 
+     /tmp/ccSI24J1.s:120    .text:00000000000000ac .L0 
+     /tmp/ccSI24J1.s:122    .text:00000000000000b0 .L0 
+     /tmp/ccSI24J1.s:125    .text:00000000000000b4 .L0 
+     /tmp/ccSI24J1.s:127    .text:00000000000000b4 .L0 
+     /tmp/ccSI24J1.s:128    .text:00000000000000b4 .L0 
+     /tmp/ccSI24J1.s:129    .text:00000000000000b4 .L0 
+     /tmp/ccSI24J1.s:133    .text:00000000000000c4 .L0 
+     /tmp/ccSI24J1.s:136    .text:00000000000000c8 .L0 
+     /tmp/ccSI24J1.s:139    .text:00000000000000d0 .L0 
+     /tmp/ccSI24J1.s:140    .text:00000000000000d0 .L0 
+     /tmp/ccSI24J1.s:141    .text:00000000000000d0 .L0 
+     /tmp/ccSI24J1.s:144    .text:00000000000000d8 .L0 
+     /tmp/ccSI24J1.s:145    .text:00000000000000d8 .L0 
+     /tmp/ccSI24J1.s:149    .text:00000000000000e8 .L0 
+     /tmp/ccSI24J1.s:150    .text:00000000000000e8 .L0 
+     /tmp/ccSI24J1.s:154    .text:00000000000000f8 .L0 
+     /tmp/ccSI24J1.s:157    .text:00000000000000fc .L0 
+GAS LISTING /tmp/ccSI24J1.s 			page 9
 
 
-     /tmp/ccdq2ap2.s:158    .text:00000000000000fc .L0 
-     /tmp/ccdq2ap2.s:159    .text:00000000000000fc .L0 
-     /tmp/ccdq2ap2.s:162    .text:0000000000000104 .L0 
-     /tmp/ccdq2ap2.s:163    .text:0000000000000104 .L0 
-     /tmp/ccdq2ap2.s:167    .text:0000000000000114 .L0 
-     /tmp/ccdq2ap2.s:170    .text:0000000000000118 .L0 
-     /tmp/ccdq2ap2.s:171    .text:0000000000000118 .L0 
-     /tmp/ccdq2ap2.s:172    .text:0000000000000118 .L0 
-     /tmp/ccdq2ap2.s:176    .text:000000000000012c .L0 
-     /tmp/ccdq2ap2.s:185    .text:000000000000012c .L0 
-     /tmp/ccdq2ap2.s:8      .rodata.str1.8:0000000000000000 .LC0
-     /tmp/ccdq2ap2.s:54     .text:0000000000000018 .L0 
-     /tmp/ccdq2ap2.s:20     .rodata.str1.8:00000000000000c0 .LC4
-     /tmp/ccdq2ap2.s:95     .text:0000000000000078 .L0 
-     /tmp/ccdq2ap2.s:11     .rodata.str1.8:0000000000000020 .LC1
-     /tmp/ccdq2ap2.s:105    .text:000000000000008c .L0 
-     /tmp/ccdq2ap2.s:14     .rodata.str1.8:0000000000000050 .LC2
-     /tmp/ccdq2ap2.s:129    .text:00000000000000b4 .L0 
-     /tmp/ccdq2ap2.s:23     .rodata.str1.8:0000000000000100 .LC5
-     /tmp/ccdq2ap2.s:145    .text:00000000000000d8 .L0 
-     /tmp/ccdq2ap2.s:26     .rodata.str1.8:0000000000000120 .LC6
-     /tmp/ccdq2ap2.s:150    .text:00000000000000e8 .L0 
-     /tmp/ccdq2ap2.s:17     .rodata.str1.8:0000000000000080 .LC3
-     /tmp/ccdq2ap2.s:163    .text:0000000000000104 .L0 
-     /tmp/ccdq2ap2.s:29     .rodata.str1.8:0000000000000178 .LC7
-     /tmp/ccdq2ap2.s:172    .text:0000000000000118 .L0 
-     /tmp/ccdq2ap2.s:101    .text:000000000000008c .L11
-     /tmp/ccdq2ap2.s:124    .text:00000000000000b4 .L12
-     /tmp/ccdq2ap2.s:134    .text:00000000000000c8 .L5
-     /tmp/ccdq2ap2.s:109    .text:000000000000009c .L1
-     /tmp/ccdq2ap2.s:155    .text:00000000000000fc .L6
-     /tmp/ccdq2ap2.s:168    .text:0000000000000118 .L8
-     /tmp/ccdq2ap2.s:468    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/ccdq2ap2.s:810    .debug_str:0000000000000196 .LASF27
-     /tmp/ccdq2ap2.s:790    .debug_str:00000000000000f5 .LASF28
-     /tmp/ccdq2ap2.s:764    .debug_str:000000000000002f .LASF29
-     /tmp/ccdq2ap2.s:5      .text:0000000000000000 .Ltext0
-     /tmp/ccdq2ap2.s:179    .text:000000000000012c .Letext0
-     /tmp/ccdq2ap2.s:754    .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/ccdq2ap2.s:796    .debug_str:0000000000000127 .LASF0
-     /tmp/ccdq2ap2.s:798    .debug_str:0000000000000134 .LASF1
-     /tmp/ccdq2ap2.s:792    .debug_str:0000000000000106 .LASF2
-     /tmp/ccdq2ap2.s:782    .debug_str:00000000000000bf .LASF4
-     /tmp/ccdq2ap2.s:808    .debug_str:0000000000000184 .LASF3
-     /tmp/ccdq2ap2.s:766    .debug_str:0000000000000052 .LASF5
-     /tmp/ccdq2ap2.s:800    .debug_str:0000000000000147 .LASF6
-     /tmp/ccdq2ap2.s:794    .debug_str:0000000000000114 .LASF7
-     /tmp/ccdq2ap2.s:814    .debug_str:0000000000000269 .LASF8
-     /tmp/ccdq2ap2.s:780    .debug_str:00000000000000b1 .LASF9
-     /tmp/ccdq2ap2.s:802    .debug_str:000000000000015a .LASF10
-     /tmp/ccdq2ap2.s:812    .debug_str:000000000000025a .LASF11
-     /tmp/ccdq2ap2.s:768    .debug_str:0000000000000059 .LASF12
-     /tmp/ccdq2ap2.s:756    .debug_str:0000000000000000 .LASF13
-     /tmp/ccdq2ap2.s:770    .debug_str:0000000000000069 .LASF14
-     /tmp/ccdq2ap2.s:806    .debug_str:000000000000016e .LASF15
-     /tmp/ccdq2ap2.s:772    .debug_str:0000000000000075 .LASF16
-     /tmp/ccdq2ap2.s:778    .debug_str:00000000000000ac .LASF17
-GAS LISTING /tmp/ccdq2ap2.s 			page 10
+     /tmp/ccSI24J1.s:158    .text:00000000000000fc .L0 
+     /tmp/ccSI24J1.s:159    .text:00000000000000fc .L0 
+     /tmp/ccSI24J1.s:162    .text:0000000000000104 .L0 
+     /tmp/ccSI24J1.s:163    .text:0000000000000104 .L0 
+     /tmp/ccSI24J1.s:167    .text:0000000000000114 .L0 
+     /tmp/ccSI24J1.s:170    .text:0000000000000118 .L0 
+     /tmp/ccSI24J1.s:171    .text:0000000000000118 .L0 
+     /tmp/ccSI24J1.s:172    .text:0000000000000118 .L0 
+     /tmp/ccSI24J1.s:176    .text:000000000000012c .L0 
+     /tmp/ccSI24J1.s:185    .text:000000000000012c .L0 
+     /tmp/ccSI24J1.s:8      .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccSI24J1.s:54     .text:0000000000000018 .L0 
+     /tmp/ccSI24J1.s:20     .rodata.str1.8:00000000000000c0 .LC4
+     /tmp/ccSI24J1.s:95     .text:0000000000000078 .L0 
+     /tmp/ccSI24J1.s:11     .rodata.str1.8:0000000000000020 .LC1
+     /tmp/ccSI24J1.s:105    .text:000000000000008c .L0 
+     /tmp/ccSI24J1.s:14     .rodata.str1.8:0000000000000050 .LC2
+     /tmp/ccSI24J1.s:129    .text:00000000000000b4 .L0 
+     /tmp/ccSI24J1.s:23     .rodata.str1.8:0000000000000100 .LC5
+     /tmp/ccSI24J1.s:145    .text:00000000000000d8 .L0 
+     /tmp/ccSI24J1.s:26     .rodata.str1.8:0000000000000120 .LC6
+     /tmp/ccSI24J1.s:150    .text:00000000000000e8 .L0 
+     /tmp/ccSI24J1.s:17     .rodata.str1.8:0000000000000080 .LC3
+     /tmp/ccSI24J1.s:163    .text:0000000000000104 .L0 
+     /tmp/ccSI24J1.s:29     .rodata.str1.8:0000000000000178 .LC7
+     /tmp/ccSI24J1.s:172    .text:0000000000000118 .L0 
+     /tmp/ccSI24J1.s:101    .text:000000000000008c .L11
+     /tmp/ccSI24J1.s:124    .text:00000000000000b4 .L12
+     /tmp/ccSI24J1.s:134    .text:00000000000000c8 .L5
+     /tmp/ccSI24J1.s:109    .text:000000000000009c .L1
+     /tmp/ccSI24J1.s:155    .text:00000000000000fc .L6
+     /tmp/ccSI24J1.s:168    .text:0000000000000118 .L8
+     /tmp/ccSI24J1.s:468    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccSI24J1.s:810    .debug_str:0000000000000196 .LASF27
+     /tmp/ccSI24J1.s:790    .debug_str:00000000000000f5 .LASF28
+     /tmp/ccSI24J1.s:764    .debug_str:000000000000002f .LASF29
+     /tmp/ccSI24J1.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccSI24J1.s:179    .text:000000000000012c .Letext0
+     /tmp/ccSI24J1.s:754    .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccSI24J1.s:796    .debug_str:0000000000000127 .LASF0
+     /tmp/ccSI24J1.s:798    .debug_str:0000000000000134 .LASF1
+     /tmp/ccSI24J1.s:792    .debug_str:0000000000000106 .LASF2
+     /tmp/ccSI24J1.s:782    .debug_str:00000000000000bf .LASF4
+     /tmp/ccSI24J1.s:808    .debug_str:0000000000000184 .LASF3
+     /tmp/ccSI24J1.s:766    .debug_str:0000000000000052 .LASF5
+     /tmp/ccSI24J1.s:800    .debug_str:0000000000000147 .LASF6
+     /tmp/ccSI24J1.s:794    .debug_str:0000000000000114 .LASF7
+     /tmp/ccSI24J1.s:814    .debug_str:0000000000000269 .LASF8
+     /tmp/ccSI24J1.s:780    .debug_str:00000000000000b1 .LASF9
+     /tmp/ccSI24J1.s:802    .debug_str:000000000000015a .LASF10
+     /tmp/ccSI24J1.s:812    .debug_str:000000000000025a .LASF11
+     /tmp/ccSI24J1.s:768    .debug_str:0000000000000059 .LASF12
+     /tmp/ccSI24J1.s:756    .debug_str:0000000000000000 .LASF13
+     /tmp/ccSI24J1.s:770    .debug_str:0000000000000069 .LASF14
+     /tmp/ccSI24J1.s:806    .debug_str:000000000000016e .LASF15
+     /tmp/ccSI24J1.s:772    .debug_str:0000000000000075 .LASF16
+     /tmp/ccSI24J1.s:778    .debug_str:00000000000000ac .LASF17
+GAS LISTING /tmp/ccSI24J1.s 			page 10
 
 
-     /tmp/ccdq2ap2.s:776    .debug_str:00000000000000a3 .LASF30
-     /tmp/ccdq2ap2.s:786    .debug_str:00000000000000d2 .LASF31
-     /tmp/ccdq2ap2.s:36     .text:0000000000000000 .LFB24
-     /tmp/ccdq2ap2.s:177    .text:000000000000012c .LFE24
-     /tmp/ccdq2ap2.s:804    .debug_str:0000000000000169 .LASF18
-     /tmp/ccdq2ap2.s:720    .debug_loc:0000000000000000 .LLST0
-     /tmp/ccdq2ap2.s:56     .text:0000000000000028 .LVL0
-     /tmp/ccdq2ap2.s:60     .text:0000000000000030 .LVL1
-     /tmp/ccdq2ap2.s:68     .text:0000000000000040 .LVL3
-     /tmp/ccdq2ap2.s:97     .text:0000000000000088 .LVL5
-     /tmp/ccdq2ap2.s:107    .text:000000000000009c .LVL7
-     /tmp/ccdq2ap2.s:131    .text:00000000000000c4 .LVL8
-     /tmp/ccdq2ap2.s:142    .text:00000000000000d8 .LVL9
-     /tmp/ccdq2ap2.s:147    .text:00000000000000e8 .LVL10
-     /tmp/ccdq2ap2.s:152    .text:00000000000000f8 .LVL11
-     /tmp/ccdq2ap2.s:160    .text:0000000000000104 .LVL12
-     /tmp/ccdq2ap2.s:165    .text:0000000000000114 .LVL13
-     /tmp/ccdq2ap2.s:174    .text:0000000000000128 .LVL14
-     /tmp/ccdq2ap2.s:818    .debug_str:000000000000028c .LASF19
-     /tmp/ccdq2ap2.s:784    .debug_str:00000000000000c6 .LASF21
-     /tmp/ccdq2ap2.s:762    .debug_str:0000000000000026 .LASF20
-     /tmp/ccdq2ap2.s:758    .debug_str:0000000000000010 .LASF22
-     /tmp/ccdq2ap2.s:788    .debug_str:00000000000000df .LASF23
-     /tmp/ccdq2ap2.s:760    .debug_str:0000000000000015 .LASF24
-     /tmp/ccdq2ap2.s:774    .debug_str:000000000000008b .LASF25
-     /tmp/ccdq2ap2.s:816    .debug_str:0000000000000279 .LASF26
-     /tmp/ccdq2ap2.s:64     .text:0000000000000038 .LVL2
-     /tmp/ccdq2ap2.s:79     .text:0000000000000050 .LVL4
-     /tmp/ccdq2ap2.s:100    .text:000000000000008c .LVL6
-     /tmp/ccdq2ap2.s:186    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccSI24J1.s:776    .debug_str:00000000000000a3 .LASF30
+     /tmp/ccSI24J1.s:786    .debug_str:00000000000000d2 .LASF31
+     /tmp/ccSI24J1.s:36     .text:0000000000000000 .LFB24
+     /tmp/ccSI24J1.s:177    .text:000000000000012c .LFE24
+     /tmp/ccSI24J1.s:804    .debug_str:0000000000000169 .LASF18
+     /tmp/ccSI24J1.s:720    .debug_loc:0000000000000000 .LLST0
+     /tmp/ccSI24J1.s:56     .text:0000000000000028 .LVL0
+     /tmp/ccSI24J1.s:60     .text:0000000000000030 .LVL1
+     /tmp/ccSI24J1.s:68     .text:0000000000000040 .LVL3
+     /tmp/ccSI24J1.s:97     .text:0000000000000088 .LVL5
+     /tmp/ccSI24J1.s:107    .text:000000000000009c .LVL7
+     /tmp/ccSI24J1.s:131    .text:00000000000000c4 .LVL8
+     /tmp/ccSI24J1.s:142    .text:00000000000000d8 .LVL9
+     /tmp/ccSI24J1.s:147    .text:00000000000000e8 .LVL10
+     /tmp/ccSI24J1.s:152    .text:00000000000000f8 .LVL11
+     /tmp/ccSI24J1.s:160    .text:0000000000000104 .LVL12
+     /tmp/ccSI24J1.s:165    .text:0000000000000114 .LVL13
+     /tmp/ccSI24J1.s:174    .text:0000000000000128 .LVL14
+     /tmp/ccSI24J1.s:818    .debug_str:000000000000028c .LASF19
+     /tmp/ccSI24J1.s:784    .debug_str:00000000000000c6 .LASF21
+     /tmp/ccSI24J1.s:762    .debug_str:0000000000000026 .LASF20
+     /tmp/ccSI24J1.s:758    .debug_str:0000000000000010 .LASF22
+     /tmp/ccSI24J1.s:788    .debug_str:00000000000000df .LASF23
+     /tmp/ccSI24J1.s:760    .debug_str:0000000000000015 .LASF24
+     /tmp/ccSI24J1.s:774    .debug_str:000000000000008b .LASF25
+     /tmp/ccSI24J1.s:816    .debug_str:0000000000000279 .LASF26
+     /tmp/ccSI24J1.s:64     .text:0000000000000038 .LVL2
+     /tmp/ccSI24J1.s:79     .text:0000000000000050 .LVL4
+     /tmp/ccSI24J1.s:100    .text:000000000000008c .LVL6
+     /tmp/ccSI24J1.s:186    .debug_info:0000000000000000 .Ldebug_info0
 
 UNDEFINED SYMBOLS
 _Z11printStringPKc
