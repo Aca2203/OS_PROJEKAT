@@ -3,12 +3,13 @@
 
 #include "../lib/hw.h"
 #include "tcb.hpp"
+#include "mySemaphore.hpp"
 
 class TCB;
 typedef TCB* thread_t;
 
-class _sem;
-typedef _sem* sem_t;
+class MySemaphore;
+typedef MySemaphore* sem_t;
 
 typedef unsigned long time_t;
 
@@ -44,6 +45,7 @@ int sem_timedwait(
     time_t timeout
 );
 int sem_trywait(sem_t id);
+
 int time_sleep(time_t);
 
 char getc();

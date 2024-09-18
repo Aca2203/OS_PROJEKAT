@@ -12,6 +12,10 @@ public:
 
     void setFinished(bool finished) { this->finished = finished; }
 
+    bool isBlocked() const { return blocked; }
+
+    void setBlocked(bool blocked) { this->blocked = blocked; }
+
     bool isMain() const { return this->main; }
 
     uint64 getTimeSlice() const { return time_slice; }
@@ -39,7 +43,8 @@ private:
         }),
         time_slice(DEFAULT_TIME_SLICE),
         main(body == nullptr),
-        finished(false) {}
+        finished(false),
+        blocked(false) {}
 
     struct Context {
         uint64 pc;
@@ -52,6 +57,7 @@ private:
     uint64 time_slice;
     bool main;
     bool finished;
+    bool blocked;
 
     friend class Riscv;
 

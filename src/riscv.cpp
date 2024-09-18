@@ -1,7 +1,7 @@
 #include "../h/riscv.hpp"
-
 #include "../lib/console.h"
 #include "../h/tcb.hpp"
+#include "../h/mySemaphore.hpp"
 #include "../h/printing.hpp"
 
 void Riscv::popSppSpie() {
@@ -26,6 +26,7 @@ void Riscv::handleSupervisorTrap() {
         thread_t* handle;
         Body body;
         void* arg;
+        sem_t sem;
 
         // Semaphore
         switch (code) {
@@ -53,6 +54,7 @@ void Riscv::handleSupervisorTrap() {
 
                 break;
 
+            // void thread_start(TCB* tcb)
             case 0x09:
                 TCB* tcb;
                 __asm__ volatile("mv %0, a1" : "=r" (tcb));
@@ -61,6 +63,7 @@ void Riscv::handleSupervisorTrap() {
 
                 break;
 
+            //int thread_create_without_start(thread_t* handle, void (*start_routine)(void*), void* arg);
             case 0x10:
                 __asm__ volatile("mv %0, a1" : "=r" (handle));
                 __asm__ volatile("mv %0, a2" : "=r" (body));
@@ -77,9 +80,8 @@ void Riscv::handleSupervisorTrap() {
 
                 break;
 
+            // int thread_create(thread_t* handle, void (*start_routine)(void*), void* arg)
             case 0x11:
-
-
                 __asm__ volatile("mv %0, a1" : "=r" (handle));
                 __asm__ volatile("mv %0, a2" : "=r" (body));
                 __asm__ volatile("mv %0, a7" : "=r" (arg));
@@ -96,6 +98,7 @@ void Riscv::handleSupervisorTrap() {
 
                 break;
 
+            // int thread_exit()
             case 0x12:
                 TCB::running->setFinished(true);
                 __asm__ volatile("li a0, 0");
@@ -103,16 +106,99 @@ void Riscv::handleSupervisorTrap() {
 
                 break;
 
+            // void thread_dispatch()
+            case 0x13:
+                break;
+
+            // int sem_open(sem_t* handle, unsigned init)
+            case 0x21:
+                sem_t* handleSem;
+                unsigned init;
+                __asm__ volatile("mv %0, a1" : "=r" (handleSem));
+                __asm__ volatile("mv %0, a2" : "=r" (init));
+
+                *handleSem = MySemaphore::createSemaphore(init);
+
+                if(*handleSem != nullptr) {
+                    __asm__ volatile("li a0, 0");
+                    __asm__ volatile("sw a0, 80(x8)");
+                } else {
+                    __asm__ volatile("li a0, -1");
+                    __asm__ volatile("sw a0, 80(x8)");
+                }
+
+                break;
+
+            // int sem_close(sem_t handle)
+            case 0x22:
+                __asm__ volatile("mv %0, a1" : "=r" (sem));
+                if(sem != nullptr) ret = sem->close();
+                else ret = -2;
+
+                __asm__ volatile("mv a0, %0" : : "r" (ret));
+                __asm__ volatile("sw a0, 80(x8)");
+
+                break;
+
+            // int sem_wait(sem_t id)
+            case 0x23:
+                __asm__ volatile("mv %0, a1" : "=r" (sem));
+                if(sem != nullptr) ret = sem->wait();
+                else ret = -2;
+
+                __asm__ volatile("mv a0, %0" : : "r" (ret));
+                __asm__ volatile("sw a0, 80(x8)");
+
+                break;
+
+            // int sem_signal(sem_t id)
+            case 0x24:
+                __asm__ volatile("mv %0, a1" : "=r" (sem));
+                if(sem != nullptr) ret = sem->signal();
+                else ret = -2;
+
+                __asm__ volatile("mv a0, %0" : : "r" (ret));
+                __asm__ volatile("sw a0, 80(x8)");
+
+                break;
+
+            // int sem_timedwait(sem_t id, time_t timeout)
+            case 0x25:
+                // time_t timeout;
+                // __asm__ volatile("mv %0, a1" : "=r" (sem));
+                // __asm__ volatile("mv %0, a2" : "=r" (timeout));
+                //
+                // //TODO
+                //
+                // __asm__ volatile("mv a0, %0" : : "r" (ret));
+                // __asm__ volatile("sw a0, 80(x8)");
+
+                break;
+
+            // int sem_trywait(sem_t id)
+            case 0x26:
+                __asm__ volatile("mv %0, a1" : "=r" (sem));
+                if(sem != nullptr) sem->trywait();
+                else ret = -2;
+
+                __asm__ volatile("mv a0, %0" : : "r" (ret));
+                __asm__ volatile("sw a0, 80(x8)");
+
+                break;
+
+            // char getc()
             case 0x41:
                 chr = __getc();
                 __asm__ volatile("mv a0, %0" : : "r" (chr));
                 __asm__ volatile("sw a0, 80(x8)");
 
-            break;
+                break;
 
+            // void putc(char)
             case 0x42:
                 __asm__ volatile("mv %0, a1" : "=r" (chr));
                 __putc(chr);
+
                 break;
 
             default:

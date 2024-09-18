@@ -70,6 +70,63 @@ void thread_start(TCB* tcb) {
     __asm__ volatile("ecall");
 }
 
+int sem_open(sem_t* handle, unsigned init) {
+    __asm__ volatile("mv a2, %0" : : "r"(init));
+    __asm__ volatile("mv a1, %0" : : "r"(handle));
+    Riscv::w_a0(0x21);
+    __asm__ volatile("ecall");
+
+    int ret = (int) Riscv::r_a0();
+    return ret;
+}
+
+int sem_close(sem_t handle) {
+    __asm__ volatile("mv a1, %0" : : "r"(handle));
+    Riscv::w_a0(0x22);
+    __asm__ volatile("ecall");
+
+    int ret = (int) Riscv::r_a0();
+    return ret;
+}
+
+int sem_wait(sem_t id) {
+    __asm__ volatile("mv a1, %0" : : "r"(id));
+    Riscv::w_a0(0x23);
+    __asm__ volatile("ecall");
+
+    int ret = (int) Riscv::r_a0();
+    return ret;
+}
+
+int sem_signal(sem_t id) {
+    __asm__ volatile("mv a1, %0" : : "r"(id));
+    Riscv::w_a0(0x24);
+    __asm__ volatile("ecall");
+
+    int ret = (int) Riscv::r_a0();
+    return ret;
+}
+
+int sem_timedwait(sem_t id, time_t timeout) {
+    __asm__ volatile("mv a2, %0" : : "r"(timeout));
+    __asm__ volatile("mv a1, %0" : : "r"(id));
+    Riscv::w_a0(0x25);
+    __asm__ volatile("ecall");
+
+    int ret = (int) Riscv::r_a0();
+    return ret;
+}
+
+int sem_trywait(sem_t id) {
+    __asm__ volatile("mv a1, %0" : : "r"(id));
+    Riscv::w_a0(0x26);
+    __asm__ volatile("ecall");
+
+    int ret = (int) Riscv::r_a0();
+    return ret;
+}
+
+
 char getc() {
     Riscv::w_a0(0x41);
     __asm__ volatile("ecall");
