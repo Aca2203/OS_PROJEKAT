@@ -26,7 +26,7 @@ private:
   thread_t myHandle;
   void (*body)(void*); void* arg;
 
-  void runWrapper(void* thread) {
+  static void runWrapper(void* thread) {
     if(thread != nullptr) ((Thread*)thread)->run();
   }
 };

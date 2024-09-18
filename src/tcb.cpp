@@ -1,6 +1,7 @@
 #include "../h/tcb.hpp"
 #include "../h/riscv.hpp"
 #include "../h/scheduler.hpp"
+#include "../h/syscall_c.hpp"
 
 TCB* TCB::running = nullptr;
 uint64 TCB::timeSliceCounter = 0;
@@ -36,6 +37,6 @@ void TCB::dispatch() {
 void TCB::threadWrapper() {
     Riscv::popSppSpie();
     running->body(running->arg);
-    running->setFinished(true);
+    thread_exit();
     TCB::yield();
 }

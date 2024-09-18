@@ -52,6 +52,24 @@ void thread_dispatch() {
     __asm__ volatile("ecall");
 }
 
+int thread_create_without_start(thread_t* handle, void (*start_routine)(void*), void* arg) {
+    __asm__ volatile("mv a7, %0" : : "r"(arg));
+    __asm__ volatile("mv a2, %0" : : "r"(start_routine));
+    __asm__ volatile("mv a1, %0" : : "r"(handle));
+    Riscv::w_a0(0x10);
+    __asm__ volatile("ecall");
+
+    int ret = (int) Riscv::r_a0();
+    return ret;
+
+}
+
+void thread_start(TCB* tcb) {
+    __asm__ volatile("mv a1, %0" : : "r"(tcb));
+    Riscv::w_a0(0x09);
+    __asm__ volatile("ecall");
+}
+
 char getc() {
     Riscv::w_a0(0x41);
     __asm__ volatile("ecall");

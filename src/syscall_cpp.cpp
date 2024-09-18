@@ -18,15 +18,28 @@ void operator delete[] (void *ptr) noexcept {
 }
 
 Thread::Thread(void (*body)(void*), void* arg) {
+    thread_create(&this->myHandle, body, arg);
+}
 
+Thread::~Thread() {
+    //thread_exit();
+    delete this->myHandle;
+}
+
+int Thread::start() {
+    thread_start(this->myHandle);
+    return 0;
+}
+
+void Thread::dispatch() {
+    thread_dispatch();
+}
+
+int Thread::sleep(time_t time) {
+    return 0;
 }
 
 Thread::Thread() {
     thread_create_without_start(&this->myHandle, runWrapper, this);
-}
-
-Thread::~Thread() {
-    thread_exit();
-    delete this->myHandle;
 }
 

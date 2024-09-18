@@ -24,6 +24,9 @@ void Riscv::handleSupervisorTrap() {
         void* ptr;
         int ret;
         char chr;
+        thread_t* handle;
+        Body body;
+        void* arg;
 
         // Semaphore
         switch (code) {
@@ -51,10 +54,32 @@ void Riscv::handleSupervisorTrap() {
 
                 break;
 
+            case 0x09:
+                TCB* tcb;
+                __asm__ volatile("mv %0, a1" : "=r" (tcb));
+
+                TCB::startThread(tcb);
+
+                break;
+
+            case 0x10:
+                __asm__ volatile("mv %0, a1" : "=r" (handle));
+                __asm__ volatile("mv %0, a2" : "=r" (body));
+                __asm__ volatile("mv %0, a7" : "=r" (arg));
+                *handle = TCB::createThreadWithoutStarting(body, arg);
+
+                if(*handle != nullptr) {
+                    __asm__ volatile("li a0, 0");
+                    __asm__ volatile("sw a0, 80(x8)");
+                } else {
+                    __asm__ volatile("li a0, -1");
+                    __asm__ volatile("sw a0, 80(x8)");
+                }
+
+                break;
+
             case 0x11:
-                thread_t* handle;
-                Body body;
-                void* arg;
+
 
                 __asm__ volatile("mv %0, a1" : "=r" (handle));
                 __asm__ volatile("mv %0, a2" : "=r" (body));
