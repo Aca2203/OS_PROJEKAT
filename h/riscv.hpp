@@ -81,6 +81,8 @@ public:
     // Upisivanje u registar a0
     static void w_a0(uint64 value);
 
+    static void exitEmulator();
+
 private:
     // Rukovalac prekidnom rutinom
     static void handleSupervisorTrap();
@@ -170,6 +172,12 @@ inline uint64 Riscv::r_a0() {
 
 inline void Riscv::w_a0(uint64 value) {
     __asm__ volatile("mv a0, %0" : : "r"(value));
+}
+
+inline void Riscv::exitEmulator() {
+    __asm__ volatile("li t0, 0x5555");
+    __asm__ volatile("li t1, 0x100000");
+    __asm__ volatile("sw t0, 0(t1)");
 }
 
 #endif

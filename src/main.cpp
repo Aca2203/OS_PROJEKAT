@@ -28,5 +28,7 @@ int main() {
 
     printString("Proces zavrsen\n");
 
+    Riscv::exitEmulator();
+
     return 0;
 }

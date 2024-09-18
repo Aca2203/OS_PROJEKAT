@@ -8,7 +8,7 @@ uint64 TCB::timeSliceCounter = 0;
 
 TCB* TCB::createThread(Body body, void* arg) {
     TCB* tcb = new TCB(body, arg);
-    if(body != nullptr) Scheduler::put(tcb);
+    if(!tcb->isMain()) Scheduler::put(tcb);
     else TCB::running = tcb;
     return tcb;
 }
@@ -31,6 +31,12 @@ void TCB::dispatch() {
     if(!old->isFinished()){ Scheduler::put(old); }
     running = Scheduler::get();
 
+    if(running->isMain()) {
+        Riscv::ms_sstatus(Riscv::SSTATUS_SPP);
+    } else {
+        Riscv::mc_sstatus(Riscv::SSTATUS_SPP);
+    }
+
     TCB::contextSwitch(&old->context, &running->context);
 }
 
@@ -38,5 +44,4 @@ void TCB::threadWrapper() {
     Riscv::popSppSpie();
     running->body(running->arg);
     thread_exit();
-    TCB::yield();
 }

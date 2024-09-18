@@ -6,7 +6,6 @@
 
 void Riscv::popSppSpie() {
     __asm__ volatile("csrw sepc, ra");
-    mc_sstatus(SSTATUS_SPP);
     __asm__ volatile("sret");
 }
 
@@ -156,5 +155,7 @@ void Riscv::handleSupervisorTrap() {
         printString("Vrednost scause: ");
         printInt(scause);
         printString("\n");
+
+        Riscv::exitEmulator();
     }
 }

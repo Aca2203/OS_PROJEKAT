@@ -12,6 +12,8 @@ public:
 
     void setFinished(bool finished) { this->finished = finished; }
 
+    bool isMain() const { return this->main; }
+
     uint64 getTimeSlice() const { return time_slice; }
 
     using Body = void (*)(void *);
@@ -36,6 +38,7 @@ private:
             stack != nullptr ? (uint64)&stack[DEFAULT_STACK_SIZE] : 0
         }),
         time_slice(DEFAULT_TIME_SLICE),
+        main(body == nullptr),
         finished(false) {}
 
     struct Context {
@@ -47,6 +50,7 @@ private:
     uint64* stack; // Mozda mora da bude char*
     Context context;
     uint64 time_slice;
+    bool main;
     bool finished;
 
     friend class Riscv;
