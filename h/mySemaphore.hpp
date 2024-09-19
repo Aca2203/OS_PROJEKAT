@@ -6,14 +6,14 @@
 
 class MySemaphore {
 public:
-    explicit MySemaphore(unsigned init = 1) {
+    explicit MySemaphore(int init = 1) {
         this->value = init;
         this->closed = false;
     }
 
     int wait();
     int signal();
-    static MySemaphore* createSemaphore(unsigned init = 1);
+    static MySemaphore* createSemaphore(int init = 1);
     unsigned getValue() const { return value; }
     int close();
 
@@ -25,7 +25,7 @@ protected:
 
 private:
     bool closed;
-    unsigned value;
+    int value;
     List<TCB> blocked;
 };
 

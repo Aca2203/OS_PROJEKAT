@@ -9,7 +9,6 @@ uint64 TCB::timeSliceCounter = 0;
 TCB* TCB::createThread(Body body, void* arg) {
     TCB* tcb = new TCB(body, arg);
     if(!tcb->isMain()) Scheduler::put(tcb);
-    else TCB::running = tcb;
     return tcb;
 }
 
@@ -43,5 +42,6 @@ void TCB::dispatch() {
 void TCB::threadWrapper() {
     Riscv::popSppSpie();
     running->body(running->arg);
-    thread_exit();
+    running->setFinished(true);
+    TCB::yield();
 }

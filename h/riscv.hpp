@@ -5,6 +5,8 @@
 
 class Riscv {
 public:
+    static int ERROR;
+
     // Stavljanje/skidanje registara x3,...,x31 na stek/sa steka
     static void pushRegisters();
     static void popRegisters();

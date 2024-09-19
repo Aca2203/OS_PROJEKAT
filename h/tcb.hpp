@@ -1,8 +1,10 @@
 #ifndef TCB_H
 #define TCB_H
 
+#include "riscv.hpp"
 #include "../lib/hw.h"
 #include "../h/scheduler.hpp"
+#include "../h/mySemaphore.hpp"
 
 class TCB {
 public:
@@ -15,6 +17,14 @@ public:
     bool isBlocked() const { return blocked; }
 
     void setBlocked(bool blocked) { this->blocked = blocked; }
+
+    uint64 getSepc() const { return this->context.sepc; }
+
+    void setSepc(uint64 value) { this->context.sepc = value; }
+
+    uint64 getSstatus() const { return this->context.sstatus; }
+
+    void setSstatus(uint64 value) { this->context.sstatus = value; }
 
     bool isMain() const { return this->main; }
 
@@ -39,7 +49,9 @@ private:
         stack(body != nullptr ? new uint64[DEFAULT_STACK_SIZE] : nullptr),
         context({
             (uint64) &threadWrapper,
-            stack != nullptr ? (uint64)&stack[DEFAULT_STACK_SIZE] : 0
+            stack != nullptr ? (uint64)&stack[DEFAULT_STACK_SIZE] : 0,
+            Riscv::r_sepc(),
+            Riscv::r_sstatus()
         }),
         time_slice(DEFAULT_TIME_SLICE),
         main(body == nullptr),
@@ -49,6 +61,8 @@ private:
     struct Context {
         uint64 pc;
         uint64 sp;
+        uint64 sepc;
+        uint64 sstatus;
     };
     Body body;
     void* arg;
@@ -60,6 +74,7 @@ private:
     bool blocked;
 
     friend class Riscv;
+    friend class MySemaphore;
 
     static void threadWrapper();
 

@@ -3,9 +3,9 @@
 
 int MySemaphore::wait() {
     if(this->closed) return -1;
-    if((int)--this->value < 0) {
+    if(--this->value < 0) {
         block();
-        thread_dispatch();
+        TCB::dispatch();
         if(this->closed) return -1;
     }
 
@@ -14,14 +14,14 @@ int MySemaphore::wait() {
 
 int MySemaphore::signal() {
     if(this->closed) return -1;
-    if((int)++this->value <= 0) {
+    if(++this->value <= 0) {
         unblock();
     }
 
     return 0;
 }
 
-MySemaphore * MySemaphore::createSemaphore(unsigned init) {
+MySemaphore * MySemaphore::createSemaphore(int init) {
     return new MySemaphore(init);
 }
 
@@ -38,8 +38,7 @@ int MySemaphore::close() {
 
 int MySemaphore::trywait() {
     if(this->closed) return -1;
-    if((int)--this->value < 0) {
-        block();
+    if((int)this->value - 1 < 0) {
         return 0;
     }
     return 1;
@@ -51,7 +50,8 @@ void MySemaphore::block() {
 }
 
 void MySemaphore::unblock() {
-    TCB* tcb = blocked.removeFirst();
+    if(this->blocked.peekFirst() == nullptr) return;
+    TCB* tcb = this->blocked.removeFirst();
     tcb->setBlocked(false);
     Scheduler::put(tcb);
 }

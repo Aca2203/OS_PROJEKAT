@@ -4,6 +4,8 @@
 #include "../h/mySemaphore.hpp"
 #include "../h/printing.hpp"
 
+int Riscv::ERROR = 0;
+
 void Riscv::popSppSpie() {
     __asm__ volatile("csrw sepc, ra");
     __asm__ volatile("sret");
@@ -15,8 +17,10 @@ void Riscv::handleSupervisorTrap() {
     uint64 scause = r_scause();
     if(scause == 0x0000000000000008UL || scause == 0x0000000000000009UL) {
         // Nije se dogodio prekid, sistemski poziv iz korisnickog ili sistemskog rezima rezima
-        uint64 volatile sepc = r_sepc() + 4;
-        uint64 volatile sstatus = r_sstatus();
+        if(TCB::running) {
+            TCB::running->setSepc(Riscv::r_sepc() + 4);
+            TCB::running->setSstatus(Riscv::r_sstatus());
+        }
         TCB::timeSliceCounter = 0;
 
         uint64 code = r_a0();
@@ -205,39 +209,49 @@ void Riscv::handleSupervisorTrap() {
                 break;
         }
 
-        TCB::dispatch();
-        w_sstatus(sstatus);
-        w_sepc(sepc);
+        if(!ERROR) TCB::dispatch();
+        if(TCB::running) {
+            w_sstatus(TCB::running->getSstatus());
+            w_sepc(TCB::running->getSepc());
+        }
     } else if(scause == 0x8000000000000001UL) {
         // Dogodio se prekid, razlog: prekid od supervizora (tajmer)
-        mc_sip(SIP_SSIP);
-        // if(++TCB::timeSliceCounter >= TCB::running->getTimeSlice()) {
-        //     uint64 volatile sepc = r_sepc();
-        //     uint64 volatile sstatus = r_sstatus();
+        // TCB::timeSliceCounter++;
+        // if(TCB::timeSliceCounter >= TCB::running->getTimeSlice()) {
+        //      if(TCB::running) {
+        //          TCB::running->setSepc(Riscv::r_sepc());
+        //          TCB::running->setSstatus(Riscv::r_sstatus());
+        //      }
         //     TCB::timeSliceCounter = 0;
         //     TCB::dispatch();
-        //     w_sstatus(sstatus);
-        //     w_sepc(sepc);
+        //      if(TCB::running) {
+        //          w_sstatus(TCB::running->getSstatus());
+        //          w_sepc(TCB::running->getSepc());
+        //      }
         // }
+        mc_sip(Riscv::SIP_SSIP);
     } else if (scause == 0x8000000000000009UL) {
         // Dogodio se prekid, razlog: spoljasni prekid (konzola)
-        console_handler();
         //mc_sip(SIP_SEIP);
+        console_handler();
     } else {
         // Neocekivani razlog prekida
+        Riscv::ERROR = 1;
+        Riscv::mc_sstatus(SSTATUS_SIE);
+        Riscv::ms_sstatus(SSTATUS_SPP);
         uint64 sepc = r_sepc();
+        uint64 stvec = r_stvec();
+        uint64 sstatus = r_sstatus();
+        uint64 scause = r_scause();
         printString("Vrednost sepc:");
         printInt(sepc);
         printString(" ");
-        uint64 stvec = r_stvec();
         printString("Vrednost stvec:");
         printInt(stvec);
         printString(" ");
-        uint64 sstatus = r_sstatus();
         printString("Vrednost sstatus:");
         printInt(sstatus);
         printString(" ");
-        uint64 scause = r_scause();
         printString("Vrednost scause: ");
         printInt(scause);
         printString("\n");

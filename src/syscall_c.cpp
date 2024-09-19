@@ -2,10 +2,6 @@
 #include "../lib/hw.h"
 #include "../h/riscv.hpp"
 
-class _sem{
-    int id;
-};
-
 void* mem_alloc(size_t size) {
 
     __asm__ volatile("mv a1, %0" : : "r"(size));

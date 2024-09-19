@@ -10,12 +10,12 @@ extern void userMain();
 int main() {
     MemoryAllocator::initFreeSegment();
 
-    thread_t threads[2];
-
     Riscv::w_stvec((uint64) &Riscv::supervisorTrap);
-    Riscv::mc_sstatus(Riscv::SSTATUS_SIE);
+    Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
 
-    thread_create(&threads[0], nullptr, nullptr);
+    thread_t threads[2];
+    threads[0] = TCB::createThread(nullptr, nullptr);
+    TCB::running = threads[0];
     thread_create(&threads[1], reinterpret_cast<void (*) (void *)>(userMain), nullptr);
 
     while(!(threads[1]->isFinished())) thread_dispatch();
