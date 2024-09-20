@@ -136,3 +136,11 @@ void putc(char ch) {
     Riscv::w_a0(0x42);
     __asm__ volatile("ecall");
 }
+
+char cgetc() {
+    return getc();
+}
+
+void cputc(char ch) {
+    putc(ch);
+}

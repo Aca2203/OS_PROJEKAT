@@ -50,5 +50,7 @@ int time_sleep(time_t);
 
 char getc();
 void putc(char);
+char cgetc();
+void cputc(char);
 
 #endif
