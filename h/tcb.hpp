@@ -6,6 +6,8 @@
 #include "../h/scheduler.hpp"
 #include "../h/mySemaphore.hpp"
 
+typedef TCB* thread_t;
+
 class TCB {
 public:
     ~TCB(){ delete[] stack; }
@@ -37,6 +39,8 @@ public:
     static TCB* createThreadWithoutStarting(Body body, void* arg);
 
     static void startThread(TCB* tcb);
+
+    static void join(thread_t* handle);
 
     static void yield();
 

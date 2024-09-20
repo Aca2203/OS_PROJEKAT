@@ -20,6 +20,11 @@ void TCB::startThread(TCB* tcb) {
     Scheduler::put(tcb);
 }
 
+void TCB::join(thread_t* handle) {
+    if(handle == nullptr) return;
+    while(!(*handle)->isFinished()) TCB::dispatch();
+}
+
 void TCB::yield() {
     Riscv::w_a0(0);
     __asm__ volatile("ecall");

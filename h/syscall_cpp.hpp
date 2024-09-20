@@ -14,6 +14,8 @@ public:
   virtual ~Thread();
 
   int start();
+  void join();
+  thread_t getMyHandle() const { return this->myHandle; }
 
   static void dispatch();
   static int sleep(time_t);
