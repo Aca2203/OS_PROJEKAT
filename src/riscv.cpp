@@ -58,6 +58,12 @@ void Riscv::handleSupervisorTrap() {
 
                 break;
 
+            case 0x08:
+                ret = TCB::running->getId();
+
+                __asm__ volatile("mv a0, %0" : : "r" (ret));
+                __asm__ volatile("sw a0, 80(x8)");
+
             // void thread_start(TCB* tcb)
             case 0x09:
                 TCB* tcb;
@@ -209,7 +215,7 @@ void Riscv::handleSupervisorTrap() {
                 break;
         }
 
-        if(!ERROR) TCB::dispatch();
+        if(!ERROR && code != 0x08) TCB::dispatch();
         if(TCB::running) {
             w_sstatus(TCB::running->getSstatus());
             w_sepc(TCB::running->getSepc());

@@ -1,5 +1,6 @@
 #include "../h/mySemaphore.hpp"
 #include "../h/syscall_c.hpp"
+#include "../h/printing.hpp"
 
 int MySemaphore::wait() {
     if(this->closed) return -1;
