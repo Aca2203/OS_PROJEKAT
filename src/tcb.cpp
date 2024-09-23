@@ -2,6 +2,7 @@
 #include "../h/riscv.hpp"
 #include "../h/scheduler.hpp"
 #include "../h/syscall_c.hpp"
+#include "../h/printing.hpp"
 
 TCB* TCB::running = nullptr;
 uint64 TCB::timeSliceCounter = 0;

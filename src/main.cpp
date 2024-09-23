@@ -15,25 +15,24 @@ public:
 
     void run() override {
         workerBody(nullptr);
-        semaphore->signal();
     }
 };
 
 void Worker::workerBody(void *arg) {
-    //int id = this->getId();
-    printInt(1);
-    printString("\n");
-//    for(int i = 0; i < 5; i++) {
-//        printString("Hello! ");
-//        printInt(id);
-//        printString("\n");
-//    }
-//    printString("Thread with id ");
-//    printInt(id);
-//    printString(" finished!\n");
+    int id = this->getId();
+    for(int i = 0; i < 5; i++) {
+        printString("Hello! ");
+        printInt(id);
+        printString("\n");
+    }
+    printString("Thread with id ");
+    printInt(id);
+    printString(" finished!\n");
+    semaphore->signal();
 }
 
 Thread* threads[5];
+const int numThreads = 5;
 
 extern void userMain();
 
@@ -46,29 +45,21 @@ int main() {
     thread_t main = TCB::createThread(nullptr, nullptr);
     TCB::running = main;
 
-    Thread::SetMaximumThreads(1);
+    Thread::SetMaximumThreads(10);
 
     semaphore = new Semaphore(0);
 
-    for(int i = 0; i < 5; i++) {
+    for(int i = 0; i < numThreads; i++) {
         threads[i] = new Worker();
     }
 
-    for(int i = 0; i < 5; i++){
-        printInt(i);
-        printString(": ");
-        int id = threads[i]->getId();
-        printInt(id);
-        printString("\n");
-    }
-
-    for(int i = 0; i < 5; i++){
+    for(int i = 0; i < numThreads; i++){
         threads[i]->start();
     }
 
-    for(int i = 0; i < 5; i++) semaphore->wait();
+    for(int i = 0; i < numThreads; i++) semaphore->wait();
 
-    for(int i = 0; i < 5; i++) delete threads[i];
+    for(int i = 0; i < numThreads; i++) delete threads[i];
     delete semaphore;
 
     Scheduler::deleteThreadQueue();

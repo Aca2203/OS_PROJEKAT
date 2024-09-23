@@ -44,7 +44,7 @@ int Thread::sleep(time_t time) {
 }
 
 int Thread::getId(){
-  return getThreadId();
+    return getThreadId();
 }
 
 void Thread::SetMaximumThreads(int num_of_threads = 5){
