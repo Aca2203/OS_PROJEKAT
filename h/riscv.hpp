@@ -5,8 +5,6 @@
 
 class Riscv {
 public:
-    static int ERROR;
-
     // Stavljanje/skidanje registara x3,...,x31 na stek/sa steka
     static void pushRegisters();
     static void popRegisters();
@@ -145,7 +143,7 @@ inline uint64 Riscv::r_sip() {
 }
 
 inline void Riscv::w_sip(uint64 sip) {
-    __asm__ volatile("csrc sip, %0" : : "r"(sip));
+    __asm__ volatile("csrw sip, %0" : : "r"(sip));
 }
 
 inline void Riscv::ms_sstatus(uint64 mask) {
@@ -163,7 +161,7 @@ inline uint64 Riscv::r_sstatus() {
 }
 
 inline void Riscv::w_sstatus(uint64 sstatus) {
-    __asm__ volatile("csrc sstatus, %0" : : "r"(sstatus));
+    __asm__ volatile("csrw sstatus, %0" : : "r"(sstatus));
 }
 
 inline uint64 Riscv::r_a0() {

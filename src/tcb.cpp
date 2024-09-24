@@ -21,7 +21,7 @@ void TCB::startThread(TCB* tcb) {
 }
 
 void TCB::yield() {
-    Riscv::w_a0(0);
+    Riscv::w_a0(13);
     __asm__ volatile("ecall");
 }
 
@@ -42,6 +42,5 @@ void TCB::dispatch() {
 void TCB::threadWrapper() {
     Riscv::popSppSpie();
     running->body(running->arg);
-    running->setFinished(true);
-    TCB::yield();
+    thread_exit();
 }
