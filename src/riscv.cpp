@@ -3,6 +3,7 @@
 #include "../h/tcb.hpp"
 #include "../h/mySemaphore.hpp"
 #include "../h/printing.hpp"
+#include "../h/mySemaphore.hpp"
 
 int Riscv::ERROR = 0;
 
@@ -57,6 +58,12 @@ void Riscv::handleSupervisorTrap() {
                 __asm__ volatile("sw a0, 80(x8)");
 
                 break;
+
+            case 0x08:
+                ret = TCB::running->getId();
+
+                __asm__ volatile("mv a0, %0" : : "r" (ret));
+                __asm__ volatile("sw a0, 80(x8)");
 
             // void thread_start(TCB* tcb)
             case 0x09:
@@ -147,7 +154,7 @@ void Riscv::handleSupervisorTrap() {
             // int sem_wait(sem_t id)
             case 0x23:
                 __asm__ volatile("mv %0, a1" : "=r" (sem));
-                if(sem != nullptr) ret = sem->wait();
+                if(sem != nullptr) ret = sem->MySemaphore::wait();
                 else ret = -2;
 
                 __asm__ volatile("mv a0, %0" : : "r" (ret));
@@ -209,7 +216,7 @@ void Riscv::handleSupervisorTrap() {
                 break;
         }
 
-        if(!ERROR) TCB::dispatch();
+        if(!ERROR && code != 0x08 && code != 0x09 && code != 0x42) TCB::dispatch();
         if(TCB::running) {
             w_sstatus(TCB::running->getSstatus());
             w_sepc(TCB::running->getSepc());
@@ -243,6 +250,8 @@ void Riscv::handleSupervisorTrap() {
         uint64 stvec = r_stvec();
         uint64 sstatus = r_sstatus();
         uint64 scause = r_scause();
+        printString("\n");
+        printString("\n");
         printString("Vrednost sepc:");
         printInt(sepc);
         printString(" ");

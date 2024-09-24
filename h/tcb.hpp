@@ -38,6 +38,8 @@ public:
 
     static void startThread(TCB* tcb);
 
+    int getId();
+
     static void yield();
 
     static TCB* running;
@@ -72,6 +74,8 @@ private:
     bool main;
     bool finished;
     bool blocked;
+    static int lastId;
+    int id = lastId++;
 
     friend class Riscv;
     friend class MySemaphore;
